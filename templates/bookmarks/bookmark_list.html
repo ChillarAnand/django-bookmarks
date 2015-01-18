@@ -1,0 +1,6 @@
+<h1>Bookmarks</h1>
+<ul>
+{% for bookmark in object_list %}
+    <a href="{{ bookmark.url }}">{{ bookmark.name }}</a><br />
+{% endfor %}
+</ul>
