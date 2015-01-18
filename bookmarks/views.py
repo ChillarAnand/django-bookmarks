@@ -1,6 +1,6 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
-
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import HttpResponse
 
 from .models import Bookmark
@@ -29,5 +29,4 @@ class BookmarkUpdateView(UpdateView):
 
 class BookmarkDeleteView(DeleteView):
     model = Bookmark
-    from django.core.urlresolvers import reverse
-    success_url = reverse('bookmark-list')
+    success_url = reverse_lazy('bookmark-list')

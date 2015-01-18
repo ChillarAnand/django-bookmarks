@@ -15,7 +15,7 @@ urlpatterns = patterns(
 
     url(r'^create/$', BookmarkCreateView.as_view()),
     url(r'^list/$', BookmarkListView.as_view(), name='bookmark-list'),
-    url(r'^update/(?P<pk>\d+)$', BookmarkUpdateView.as_view()),
-    url(r'^delete/(?P<pk>\d+)$', BookmarkDeleteView.as_view()),
+    url(r'^update/(?P<pk>\d+)/$', BookmarkUpdateView.as_view()),
+    url(r'^delete/(?P<pk>\d+)/$', BookmarkDeleteView.as_view()),
 
 )
