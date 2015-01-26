@@ -1,7 +1,7 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, HttpResponseRedirect
 
 from .models import Bookmark
 
@@ -11,7 +11,7 @@ class BookmarkCreateView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponse("Bookmark added.")
+        return HttpResponseRedirect(reverse_lazy('bookmark-list'))
 
 
 class BookmarkListView(ListView):
@@ -24,7 +24,7 @@ class BookmarkUpdateView(UpdateView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponse("Bookmark updated.")
+        return HttpResponseRedirect(reverse_lazy('bookmark-list'))
 
 
 class BookmarkDeleteView(DeleteView):
