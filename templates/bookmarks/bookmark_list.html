@@ -7,7 +7,7 @@
     Name: <b><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></b><br />
     URL: <b>{{ bookmark.url }}<br /></b>
     Description: <b>{{ bookmark.description }}<br /></b>
-    TAGS: <b> {{ bookmark.tags }}</b><br /><br />
+    Folder: <b> {{ bookmark.folder }}</b><br />
     <a href="{% url 'bookmark-update' bookmark.id %}">Edit</a>
     <a href="{% url 'bookmark-delete' bookmark.id %}">Delete</a>
     <br /><br /><br />

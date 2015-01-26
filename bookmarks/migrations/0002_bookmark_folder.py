@@ -11,8 +11,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
+        migrations.AddField(
             model_name='bookmark',
-            name='user',
+            name='folder',
+            field=models.ForeignKey(default='', to='bookmarks.Folder'),
+            preserve_default=False,
         ),
     ]
