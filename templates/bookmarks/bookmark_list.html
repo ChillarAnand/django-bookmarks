@@ -1,12 +1,15 @@
 <h1>Bookmarks</h1>
-<a href="/create/">Create</a>
+<a href="/create/">Create Bookmark</a>
 
 <ul>
-
+    <h3>Bookmark list</h3>
 {% for bookmark in object_list %}
-    <b><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></b> {{ bookmark.tags }}
+    Name: <b><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></b><br />
+    URL: <b>{{ bookmark.url }}<br /></b>
+    Description: <b>{{ bookmark.description }}<br /></b>
+    TAGS: <b> {{ bookmark.tags }}</b><br /><br />
     <a href="{% url 'bookmark-update' bookmark.id %}">Edit</a>
     <a href="{% url 'bookmark-delete' bookmark.id %}">Delete</a>
-    <br />
+    <br /><br /><br />
 {% endfor %}
 </ul>
