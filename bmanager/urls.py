@@ -3,22 +3,26 @@ from django.contrib import admin
 
 from .views import HelloWorldView
 
-from bookmarks.views import (BookmarkCreateView, BookmarkListView,
-                             BookmarkUpdateView, BookmarkDeleteView)
+from bookmarks.views import (create_bookmark, list_bookmarks,
+                             edit_bookmark, delete_bookmark)
 
 
 urlpatterns = patterns(
     '',
-    url(r'^$', BookmarkListView.as_view(), name='bookmark-list'),
 
     url(r'^hello/$', HelloWorldView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^create/$', BookmarkCreateView.as_view()),
-    url(r'^list/$', BookmarkListView.as_view(), name='bookmark-list'),
+    url(r'^create/$', create_bookmark, name='create_bookmark'),
+    url(r'^list/$', list_bookmarks, name='list_bookmarks'),
+    url(r'^edit/(?P<bookmark_id>\d+)$', edit_bookmark, name='edit_bookmark'),
+    url(r'^delete/(?P<bookmark_id>\d+)$', delete_bookmark,
+        name='delete_bookmark'),
 
-    url(r'^update/(?P<pk>\d+)/$', BookmarkUpdateView.as_view(),
-        name='bookmark-update'),
-    url(r'^delete/(?P<pk>\d+)/$', BookmarkDeleteView.as_view(),
-        name='bookmark-delete'),
+    # url(r'^list/$', BookmarkListView.as_view(), name='bookmark-list'),
+
+    #     url(r'^update/(?P<pk>\d+)/$', BookmarkUpdateView.as_view(),
+    #         name='bookmark-update'),
+    #     url(r'^delete/(?P<pk>\d+)/$', BookmarkDeleteView.as_view(),
+    #         name='bookmark-delete'),
 )
