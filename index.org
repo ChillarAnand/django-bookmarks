@@ -1,0 +1,231 @@
+#+AUTHOR: Anand Pandikunta
+
+#+STARTUP: showall
+
+#+REVEAL_ROOT: file:///home/anand/.emacs.d/vendor/reveal.js/
+#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/2.5.0/
+
+#+REVEAL_TRANS: linear
+#+REVEAL-SLIDE-NUMBER: t
+#+REVEAL_THEME: simple
+
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+
+#+BIND: org-confirm-babel-evaluate nil
+
+
+
+* Getting Started With Django
+
+Anand Reddy Pandikunta
+
+http://avilpage.com/
+
+
+* What You Will Learn
+
+Overview of Django
+
+CRUD Operations
+
+
+* What You Should Know
+
+Basics Of Python
+
+Basics Of Web development
+
+Basics Of Databases
+
+
+* Ask
+
+
+* Django Setup
+
+#+BEGIN_SRC python
+
+# Create New Virtualenv
+python3 -m venv bmanager-venv --without-pip
+source bmanager-venv/bin/activate
+curl https://bootstrap.pypa.io/get-pip.py | python
+deactivate
+source bmanager-venv/bin/activate
+
+# Install Django
+pip install django==1.7
+#+END_src
+
+
+* Starting A Project
+
+#+BEGIN_SRC python
+django-admin startproject bmanager
+python manage.py runserver
+#+END_src
+
+
+* Simple Hello World
+
+#+BEGIN_SRC python
+# views.py
+from django.shortcuts import HttpResponse
+
+def hello(request):
+    return HttpResponse('Hello World')
+
+# urls.py
+url(r'^hello', hello, name='hello')
+
+#+END_src
+
+
+* The BIG Picture
+
+#+ATTR_HTML: :align left :height 150px :width 400px :cellpadding 20px
+[[./images/django-1.png]]
+
+#+ATTR_HTML: :align left :height 150px :width 400px :cellpadding 20px
+[[./images/django-2.png]]
+
+#+ATTR_HTML: :align left :height 150px :width 400px :cellpadding 20px :hspace 20px :style margin-bottom:30px
+[[./images/django-3.png]]
+
+#+ATTR_HTML: :align left :height 150px :width 400px :cellpadding 20px
+[[./images/django-4.png]]
+
+
+* Better Hello World
+
+#+BEGIN_SRC python
+import datetime
+from django.shortcuts import render
+
+
+def hello(request):
+    time = str(datetime.datetime.now())
+    return render(request, 'hello.html', {'time': time})
+#+END_src
+
+
+* Start App
+
+#+BEGIN_SRC python
+python3 manage.py startapp bookmarks
+#+END_src
+
+
+* MVT Pattern
+
+#+BEGIN_SRC ditaa :file mvt.png :cmdline -r
+  +----------------------------------------------------+
+  |                                                    |
+  |Model - Each model represents a database table      |
+  |                                                    |
+  +----------------------------------------------------+
+                          |
+                          |
+  +----------------------------------------------------+
+  |                                                    |
+  |View - Takes http request & returns http response   |
+  |                                                    |
+  +----------------------------------------------------+
+                          |
+                          |
+  +----------------------------------------------------+
+  |                                                    |
+  |Template - Presentation logic                       |
+  |                                                    |
+  +----------------------------------------------------+
+
+#+END_SRC
+
+
+* Models
+
+#+BEGIN_SRC python
+from django.db import models
+
+
+class Bookmark(models.Model):
+    name = models.CharField(max_length=20)
+    url = models.URLField()
+#+END_SRC
+
+
+* Admin
+
+#+BEGIN_SRC python
+from django.contrib import admin
+
+from bookmarks.models import Bookmark
+
+
+admin.site.register(Bookmark)
+#+END_SRC
+
+
+
+* Models API
+
+#+BEGIN_SRC python
+>>> from bookmarks.models import Bookmark
+
+>>> Bookmark.objects.all()
+[<Bookmark: python>, <Bookmark: django>]
+
+>>> Bookmark.objects.get(pk=1)
+<Bookmark: python>
+
+>>> Bookmark.objects.filter(name__startswith='p')
+[<Bookmark: python>, <Bookmark: python>]
+
+#+END_SRC
+
+
+* Create Bookmark View
+
+Create View
+
+Create Form
+
+Create Template
+
+
+* More Views
+
+List Bookmarks
+
+Edit Bookmarks
+
+Delete Bookmarks
+
+
+* Adding a Foreignkey
+
+#+BEGIN_SRC python
+class Folder(models.Model):
+    folder = models.CharField(max_length=20)
+
+class Bookmark(models.Model):
+    folder = models.ForeignKey(Folder, null=True)
+#+END_SRC
+
+
+* Where To Go From Here
+
+***** Django Polls Application - http://goo.gl/pxIXp7
+
+***** Write Simple Applications - URL Shortner, To Do List
+
+***** GSWD - http://gettingstartedwithdjango.com/
+
+
+* Where To Get Help
+
+***** BangPypers Mailing List - bangpypers@python.org
+
+***** IRC - #django #python-india
+
+***** Meet people - http://people.djangoproject.com/

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>django-for-beginners</title>
+<meta name="author" content="(Anand Pandikunta)"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/reveal.min.css"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/theme/simple.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.5.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+<section id="sec-1" >
+
+<h2>Getting Started With Django</h2>
+<p>
+Anand Reddy Pandikunta
+</p>
+
+<p>
+<a href="http://avilpage.com/">http://avilpage.com/</a>
+</p>
+</section>
+
+
+</section>
+<section>
+<section id="sec-2" >
+
+<h2>What You Will Learn</h2>
+<p>
+Overview of Django
+</p>
+
+<p>
+CRUD Operations
+</p>
+</section>
+
+
+</section>
+<section>
+<section id="sec-3" >
+
+<h2>What You Should Know</h2>
+<p>
+Basics Of Python
+</p>
+
+<p>
+Basics Of Web development
+</p>
+
+<p>
+Basics Of Databases
+</p>
+</section>
+
+
+</section>
+<section>
+<section id="sec-4" >
+
+<h2>Ask</h2>
+<p>Feel free to interrupt & ask during the session.</p>
+</section>
+
+
+</section>
+<section>
+<section id="sec-5" >
+
+<h2>Django Setup</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">Create New Virtualenv</span>
+python3 -m venv bmanager-venv --without-pip
+source bmanager-venv/<span style="color: #483d8b;">bin</span>/activate
+curl https://bootstrap.pypa.io/get-pip.py | python
+deactivate
+source bmanager-venv/<span style="color: #483d8b;">bin</span>/activate
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Install Django</span>
+pip install django==1.7
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-6" >
+
+<h2>Starting A Project</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python">django-admin startproject bmanager
+python manage.py runserver
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-7" >
+
+<h2>Simple Hello World</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">views.py</span>
+<span style="color: #a020f0;">from</span> django.shortcuts <span style="color: #a020f0;">import</span> HttpResponse
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">hello</span>(request):
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">return</span> HttpResponse(<span style="color: #8b2252;">'Hello World'</span>)
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">urls.py</span>
+url(r<span style="color: #8b2252;">'^hello'</span>, hello, name=<span style="color: #8b2252;">'hello'</span>)
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-8" >
+
+<h2>The BIG Picture</h2>
+<img src="./images/django-1.png" alt="django-1.png" align="left" height="150px" width="400px" cellpadding="20px" />
+
+<img src="./images/django-2.png" alt="django-2.png" align="left" height="150px" width="400px" cellpadding="20px" />
+
+<img src="./images/django-3.png" alt="django-3.png" align="left" height="150px" width="400px" cellpadding="20px" hspace="20px" style="margin-bottom:30px" />
+
+<img src="./images/django-4.png" alt="django-4.png" align="left" height="150px" width="400px" cellpadding="20px" />
+</section>
+
+
+</section>
+<section>
+<section id="sec-9" >
+
+<h2>Better Hello World</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><span style="color: #a020f0;">import</span> datetime
+<span style="color: #a020f0;">from</span> django.shortcuts <span style="color: #a020f0;">import</span> render
+
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">hello</span>(request):
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">time</span> = <span style="color: #483d8b;">str</span>(datetime.datetime.now())
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">return</span> render(request, <span style="color: #8b2252;">'hello.html'</span>, {<span style="color: #8b2252;">'time'</span>: time})
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-10" >
+
+<h2>Start App</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python">python3 manage.py startapp bookmarks
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-11" >
+
+<h2>MVT Pattern</h2>
+<img src="mvt.png" alt="mvt.png" />
+</section>
+
+
+</section>
+<section>
+<section id="sec-12" >
+
+<h2>Models</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><span style="color: #a020f0;">from</span> django.db <span style="color: #a020f0;">import</span> models
+
+
+<span style="color: #a020f0;">class</span> <span style="color: #228b22;">Bookmark</span>(models.Model):
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">name</span> = models.CharField(max_length=20)
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">url</span> = models.URLField()
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-13" >
+
+<h2>Admin</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><span style="color: #a020f0;">from</span> django.contrib <span style="color: #a020f0;">import</span> admin
+
+<span style="color: #a020f0;">from</span> bookmarks.models <span style="color: #a020f0;">import</span> Bookmark
+
+
+admin.site.register(Bookmark)
+</pre>
+</div>
+</section>
+
+
+
+</section>
+<section>
+<section id="sec-14" >
+
+<h2>Models API</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python">&gt;&gt;&gt; <span style="color: #a020f0;">from</span> bookmarks.models <span style="color: #a020f0;">import</span> Bookmark
+
+&gt;&gt;&gt; Bookmark.objects.<span style="color: #483d8b;">all</span>()
+[&lt;Bookmark: python&gt;, &lt;Bookmark: django&gt;]
+
+&gt;&gt;&gt; Bookmark.objects.get(pk=1)
+&lt;Bookmark: python&gt;
+
+&gt;&gt;&gt; Bookmark.objects.<span style="color: #483d8b;">filter</span>(name__startswith=<span style="color: #8b2252;">'p'</span>)
+[&lt;Bookmark: python&gt;, &lt;Bookmark: python&gt;]
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-15" >
+
+<h2>Create Bookmark View</h2>
+<p>
+Create View
+</p>
+
+<p>
+Create Form
+</p>
+
+<p>
+Create Template
+</p>
+</section>
+
+
+</section>
+<section>
+<section id="sec-16" >
+
+<h2>More Views</h2>
+<p>
+List Bookmarks
+</p>
+
+<p>
+Edit Bookmarks
+</p>
+
+<p>
+Delete Bookmarks
+</p>
+</section>
+
+
+</section>
+<section>
+<section id="sec-17" >
+
+<h2>Adding a Foreignkey</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Folder</span>(models.Model):
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">folder</span> = models.CharField(max_length=20)
+
+<span style="color: #a020f0;">class</span> <span style="color: #228b22;">Bookmark</span>(models.Model):
+<span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">folder</span> = models.ForeignKey(Folder, null=<span style="color: #008b8b;">True</span>)
+</pre>
+</div>
+</section>
+
+
+</section>
+<section>
+<section id="sec-18" >
+
+<h2>Where To Go From Here</h2>
+<ul class="org-ul"><li class="fragment none">Django Polls Application - <a href="http://goo.gl/pxIXp7">http://goo.gl/pxIXp7</a><br/></li>
+
+<li class="fragment none">Write Simple Applications - URL Shortner, To Do List<br/></li>
+
+<li class="fragment none">GSWD - <a href="http://gettingstartedwithdjango.com/">http://gettingstartedwithdjango.com/</a><br/></li></ul>
+</section>
+
+
+</section>
+<section>
+<section id="sec-19" >
+
+<h2>Where To Get Help</h2>
+<ul class="org-ul"><li class="fragment none">BangPypers Mailing List - bangpypers@python.org<br/></li>
+
+<li class="fragment none">IRC - #django #python-india<br/></li>
+
+<li class="fragment none">Meet people - <a href="http://people.djangoproject.com/">http://people.djangoproject.com/</a><br/></li></ul>
+</section>
+</section>
+</div>
+</div>
+
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/js/reveal.min.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
