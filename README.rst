@@ -3,6 +3,8 @@ django-bookmarks
 
 Simple django app to get started with Django & learn CRUD operations.
 
+Slides: http://chillaranand.github.io/django-bookmarks/
+
 
 Screenshot
 ----------
